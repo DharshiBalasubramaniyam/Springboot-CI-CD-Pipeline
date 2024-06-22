@@ -35,7 +35,7 @@ jobs:
 
   process-issue-creation-add-label:
     runs-on: ubuntu-latest
-    needs: comment-on-issue
+    needs: process-issue-creation-auto-comment
 
     steps: 
     - name: Checkout repository
