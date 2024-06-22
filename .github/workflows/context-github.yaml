@@ -1,0 +1,20 @@
+name: View attributes of context and github
+
+on:
+  pull_request:
+    types: ['opened']
+
+jobs:
+  view-context-github-attributes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: print attributes
+        uses: actions/github-script@v6
+        with:
+          scripts: |
+            console.log(JSON.stringify(context, null, 2));
+            console.log(JSON.stringify(github, null, 2));
