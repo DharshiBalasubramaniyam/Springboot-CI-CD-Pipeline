@@ -23,7 +23,7 @@ The main features of this project include:
    
 4. **AWS Deployment**
 
-## Dockerization
+## 🌟 Dockerization
 
 Docker is a tool designed to make it easy to build, test, deploy and run applications by using containers.
 
