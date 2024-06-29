@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @GetMapping("/home")
-    public ResponseEntity<String> home() {
+    public ResponseEntity<String> welcome() {
         return ResponseEntity.ok("Welcome to Spring Boot CI/CD Pipeline!");
     }
 
