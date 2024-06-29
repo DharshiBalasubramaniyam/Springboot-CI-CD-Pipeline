@@ -9,7 +9,7 @@ public class Controller {
 
     @GetMapping("/welcome")
     public ResponseEntity<String> welcome() {
-        return ResponseEntity.ok("Welcome to Spring Boot CI/CD Pipeline");
+        return ResponseEntity.ok("Welcome to Spring Boot CI/CD Pipeline!");
     }
 
 }
