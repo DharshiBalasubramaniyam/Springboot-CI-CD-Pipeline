@@ -52,22 +52,21 @@ Docker ensures that our application runs the same way on any machine. This elimi
 1. Create a Dockerfile.
 ```
 # Specify the base image for your Docker image
-# Eg., for JAVA 17, use openjdk:17-jdk-slim
-FROM {YOUR_BASE_IMAGE}
+FROM openjdk:17-jdk-slim  # Replace with your desired JDK version
 
 # Expose the application port
-EXPOSE {YOUR_PORT}
+EXPOSE 8080               # Replace with your application's exposed port
 
 # Add the JAR file to the container
-ADD target/{YOUR_JAR_NAME}.jar {YOUR_JAR_NAME}.jar
+COPY target/yourapp.jar yourapp.jar  # Replace with your actual JAR name
 
 # Run the JAR file
-ENTRYPOINT ["java","-jar","/{YOUR_JAR_NAME}.jar"]
+ENTRYPOINT ["java","-jar","/yourapp.jar"]
 ```
 
 2. Build Docker image.
 ```
-docker build -t yourusername/yourjarname .
+docker build -t yourusername/yourapp .
 ```
 
 3. Login to Dockerhub.
@@ -77,13 +76,13 @@ docker login -u yourusername -p yourpassword
 
 4. Push the image to Dockerhub.
 ```
-docker push yourusername/yourjarname:yourtagname
+docker push yourusername/yourapp:yourtagname
 ```
 
 5. Pull and run the image. (By others)
 ```
-docker pull yourusername/yourjarname:yourtagname
-docker run -p 8080:8080 yourusername/yourjarname:yourtagname
+docker pull yourusername/yourapp:yourtagname
+docker run -p 8080:8080 yourusername/yourapp:yourtagname
 ```
 
 ### Automate Dockerization with GitHub Actions
@@ -98,6 +97,43 @@ docker run -p 8080:8080 yourusername/yourjarname:yourtagname
 
 - Automating Tasks with GitHub Actions saves time, reduces manual effort and ensures that every code change triggers a consistent build and deployment process.
 
-- Refer <a href="./.github/workflows/ci-cd.yml">ci-cd.yml</a> file to refer how to automate dockarization with GA.
+- The following example workflow demonstrates how to build a docker image and push it to the DockerHub.
+
+```yaml
+name: CI/CD Pipeline  # Name of the CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]  # Trigger on push events to the main branch
+  pull_request:
+    branches: [ "main" ]  # Trigger on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Runs on the latest version of Ubuntu | Default operating system environment for workflows unless explicitly specified.
+    
+    steps:
+    - name: Checkout code  # Step to checkout the code from the repository | Fetch the source code repository into the runner machine where our workflow is executing. 
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17 # Step to set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Build with Maven # Step to build the project with Maven
+      run: mvn clean install
+
+    - name: Login to DockerHub # Step to login to DockerHub
+      run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+
+    - name: Build Docker image # Step to build the Docker image
+      run: docker build -t ${{secrets.DOCKER_USERNAME}}/${{secrets.REPOSITORY_NAME}} .
+
+    - name: Push the image to DockerHub # Step to push the Docker image to DockerHub
+      run: docker push ${{secrets.DOCKER_USERNAME}}/${{secrets.REPOSITORY_NAME}}:${{secrets.TAG_NAME}}
+```
 
 
