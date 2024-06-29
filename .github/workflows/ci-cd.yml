@@ -24,11 +24,22 @@ jobs:
     - name: Build with Maven # Step to build the project with Maven
       run: mvn clean install
 
-    - name: Login to DockerHub # Step to login to DockerHub
-      run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+    # - name: Login to DockerHub # Step to login to DockerHub
+    #   run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
 
-    - name: Build Docker image # Step to build the Docker image
-      run: docker build -t dharshib/springboot-ci-cd .
+    # - name: Build Docker image # Step to build the Docker image
+    #   run: docker build -t dharshib/springboot-ci-cd .
 
-    - name: Push the image to DockerHub # Step to push the Docker image to DockerHub
-      run: docker push dharshib/springboot-ci-cd:latest
+    # - name: Push the image to DockerHub # Step to push the Docker image to DockerHub
+    #   run: docker push dharshib/springboot-ci-cd:latest
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
