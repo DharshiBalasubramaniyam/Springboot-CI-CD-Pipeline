@@ -188,4 +188,6 @@ For example, we might have a web server container and a database container defin
 4. Setup EC2 instances (Opt for the EC2 launch type).
 5. Set Up Load Balancing (Optional).
 6. Create workflow file to automate CI/CD Integration with GitHubActions (check <a href="./.github/workflows/ci-cd.yml">ci-cd.yml</a> workflow file).
-7. Access the endpoint of our deployed application in a browser.
+7. Access the endpoint of our deployed application in a browser. To access the endpoint of your deployed application in a browser.
+   - To access the endpoint of your deployed application, use the DNS name of your Elastic Load Balancer (ELB) by copying it and pasting it into your web browser's address bar.
+   - If you're not using a load balancer, access the application using the service's public IP address and the specified port number.
