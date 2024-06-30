@@ -136,4 +136,56 @@ jobs:
       run: docker push ${{secrets.DOCKER_USERNAME}}/${{secrets.REPOSITORY_NAME}}:${{secrets.TAG_NAME}}
 ```
 
+## 🌟 AWS Deployment
 
+AWS stands for Amazon Web Services, a cloud infrastructure where we can host our application.
+
+AWS offer IT services to the market in form of web services/cloud computing, which is about storing and access the data over the internet.
+
+AWS offers a plethora of services across multiple categories.
+
+For example: 
+
+1. compute: Amazon EC2, AWS Lambda
+2. containers: Amazon ECS, Amazon EKS
+3. storage: Amazon S3
+4. database: Amazon RDS, Amazon DynamoDB
+   
+and even more categories and services, making it a versatile platform for various IT needs.
+
+Here as we are going to deploy a containerazed application we are going to look into containers category.
+
+## Amazon ECS
+
+- Amazon Elastic Container Service (ECS) is a **fully managed container orchestration service** provided by Amazon Web Services (AWS).
+
+- A **fully managed container orchestration service** means that the service takes care of all the underlying infrastructure and complex operations (scheduling, scaling, load balancing, monitoring etc.) needed to deploy, manage, and scale containerized applications.
+
+**Amazon ECS Components**
+
+- **Docker image Registry**: The Docker registries store Docker images. We can use Amazon Elastic Container Registry (ECR), a fully managed container image registry service provided by AWS or else DockerHub.
+
+- **Task Definitions**: A blueprint that describes how a Docker container should launch. It includes settings like the Docker image to use, CPU and memory requirements, and environment variables.
+
+- **Tasks**: The instantiation of a task definition.
+
+- **Container**: A task definition can include multiple container definitions, allowing us to define complex applications that consist of multiple interacting containers.
+For example, we might have a web server container and a database container defined within the same task definition.
+
+- **Services**: Allows to run and maintain a specified number of task instances simultaneously in a cluster. 
+
+- **Cluster**: A logical grouping of tasks or services.
+
+- **Elastic Load Balancing (ELB)**: Distributes incoming traffic across tasks in your services, ensuring scalability and reliability.
+
+- **Launch Type**: Refers to how we want to deploy and manage your containers. AWS ECS supports two launch types: EC2 Launch Type, Fargate Launch Type. With EC2 we have to manage the EC2 instances(virtual servers) where our containers run. But with fargate, AWS manages the infrastructure for us automatically, we don’t need to provision or manage EC2 instances directly.
+
+## ECS workflow 
+
+1. Create a cluster.
+2. Create a service within the cluster.
+3. Define Task definition.
+4. Setup EC2 instances (Opt for the EC2 launch type).
+5. Set Up Load Balancing (Optional).
+6. Create workflow file to automate CI/CD Integration with GitHubActions (check <a href="./.github/workflows/ci-cd.yml">ci-cd.yml</a> workflow file).
+7. Access the endpoint of our deployed application in a browser.
