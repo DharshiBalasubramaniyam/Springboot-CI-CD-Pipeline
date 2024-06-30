@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]  # Trigger on pull requests to the main branch
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest  # Runs on the latest version of Ubuntu | Default operating system environment for workflows unless explicitly specified.
     
     steps:
@@ -44,6 +44,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
+    # Instead of ECR we can also push the image to Dockhub and pull it to ECS.
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
