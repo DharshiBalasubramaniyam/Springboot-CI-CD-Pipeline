@@ -4,7 +4,10 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/Spring%20Boot-green?style=for-the-badge">
   <img alt="Static Badge" src="https://img.shields.io/badge/GitHub%20Actions-purple?style=for-the-badge">
   <img alt="Static Badge" src="https://img.shields.io/badge/Docker-blue?style=for-the-badge">
-  <img alt="Static Badge" src="https://img.shields.io/badge/AWS-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20ecs-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20ecr-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/aws%20fargate-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20elb-red?style=for-the-badge">
 </p>
 
 ## 🌟 Description
