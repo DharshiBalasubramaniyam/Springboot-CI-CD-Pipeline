@@ -1,3 +1,7 @@
+# This workflow will build docker image and push it to DockerHub,
+# After that, This wrkflow build and push a new container image to Amazon ECR,
+# and then will deploy a new task definition to Amazon ECS, when there is a push to the "main" branch.
+
 name: CI/CD Pipeline  # Name of the CI/CD Pipeline
 
 on:
