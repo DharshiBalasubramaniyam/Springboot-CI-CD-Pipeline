@@ -4,7 +4,10 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/Spring%20Boot-green?style=for-the-badge">
   <img alt="Static Badge" src="https://img.shields.io/badge/GitHub%20Actions-purple?style=for-the-badge">
   <img alt="Static Badge" src="https://img.shields.io/badge/Docker-blue?style=for-the-badge">
-  <img alt="Static Badge" src="https://img.shields.io/badge/AWS-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20ecs-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20ecr-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/aws%20fargate-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20elb-red?style=for-the-badge">
 </p>
 
 ## 🌟 Description
@@ -182,11 +185,11 @@ For example, we might have a web server container and a database container defin
 
 ## ECS workflow 
 
-1. Create a cluster.
-2. Create a service within the cluster.
-3. Define Task definition.
-4. Setup EC2 instances (Opt for the EC2 launch type).
-5. Set Up Load Balancing (Optional).
+1. Create an ECR repository to store your images.
+2. Create an ECS task definition, an ECS cluster, and an ECS service.
+3. Setup EC2 instances (Opt for the EC2 launch type).
+4. Set Up Load Balancing (Optional).
+5. Store your ECS task definition as a JSON file in your repository.
 6. Create workflow file to automate CI/CD Integration with GitHubActions (check <a href="./.github/workflows/ci-cd.yml">ci-cd.yml</a> workflow file).
 7. Access the endpoint of our deployed application in a browser. To access the endpoint of your deployed application in a browser.
    - To access the endpoint of your deployed application, use the DNS name of your Elastic Load Balancer (ELB) by copying it and pasting it into your web browser's address bar.

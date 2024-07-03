@@ -1,3 +1,7 @@
+# This workflow will build docker image and push it to DockerHub,
+# After that, This wrkflow build and push a new container image to Amazon ECR,
+# and then will deploy a new task definition to Amazon ECS, when there is a push to the "main" branch.
+
 name: CI/CD Pipeline  # Name of the CI/CD Pipeline
 
 on:
@@ -24,14 +28,14 @@ jobs:
     - name: Build with Maven # Step to build the project with Maven
       run: mvn clean install
 
-    # - name: Login to DockerHub # Step to login to DockerHub
-    #   run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-
-    # - name: Build Docker image # Step to build the Docker image
-    #   run: docker build -t dharshib/springboot-ci-cd .
-
-    # - name: Push the image to DockerHub # Step to push the Docker image to DockerHub
-    #   run: docker push dharshib/springboot-ci-cd:latest
+    - name: build and push the docker image to dockerhub
+      run: |
+        # 1. Login to DockerHub
+        # 2. Build the Docker image
+        # 3. Push the Docker image to DockerHub
+        docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} 
+        docker build -t dharshib/springboot-ci-cd .  
+        docker push dharshib/springboot-ci-cd:latest 
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
@@ -60,7 +64,7 @@ jobs:
 
     # Updating our ECS task definition file with the newly built Docker image ID 
     # after successfully building and pushing the Docker image to Amazon ECR. 
-    - name: Fill in the new image ID in the Amazon ECS task definition
+    - name: Update ECS task definition with new image 
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
@@ -68,7 +72,7 @@ jobs:
         container-name: ${{ secrets.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
 
-    - name: Deploy Amazon ECS task definition
+    - name: Deploy the updated ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
