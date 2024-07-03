@@ -8,23 +8,32 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20ecr-red?style=for-the-badge">
   <img alt="Static Badge" src="https://img.shields.io/badge/aws%20fargate-red?style=for-the-badge">
   <img alt="Static Badge" src="https://img.shields.io/badge/amazon%20elb-red?style=for-the-badge">
+  <img alt="Static Badge" src="https://img.shields.io/badge/mongodb%20atlas-darkgreen?style=for-the-badge">
 </p>
+
+- - -
 
 ## 🌟 Description
 
-This project demonstrates a complete CI/CD pipeline for a Spring Boot application using GitHub Actions, Docker, and AWS. 
+This project demonstrates a complete CI/CD pipeline for a Spring Boot CRUD application using GitHub Actions, Docker, and AWS. 
 
 The pipeline automates the build, test, Dockerization, and deployment processes to ensure consistent and reliable delivery of the application.
 
 The main features of this project include:
 
-1. **Spring Boot Application**: A sample Spring Boot application that serves as the base for demonstrating the CI/CD pipeline.
+1. **Spring Boot Application**: A Inventory CRUD application that serves as the base for demonstrating the CI/CD pipeline.
    
-2. **Dockerization**: The application is packaged into a Docker container to ensure it runs consistently across different environments.
+2. **Dockerization**: The application is packaged into a Docker container and the Docker image is pushed to DockerHub for easy distribution.
    
-3. **Continuous Integration with GitHub Actions**: Automated build, test, and Dockerization of the Spring Boot application using GitHub Actions. Every push to the main branch triggers the CI pipeline.
-   
-4. **AWS Deployment**
+3. **AWS Deployment**: Deployment utilizes Amazon ECR for Docker image storage, deploys on Amazon ECS service powered by AWS Fargate, and balances traffic with ELB.
+
+4. **MongoDB Integration**: The MongoDB hosted on Mongo Atlas for scalable and reliable data storage.
+
+5. **Continuous Integration with GitHub Actions**: Automated build, test, dockerization and deployment of the Spring Boot application using GitHub Actions. Every push to the main branch triggers the CI pipeline.
+
+The frontend React application is also Dockerized and deployed using GitHub Actions, Docker, and AWS. Explore the frontend repository <a href="https://github.com/DharshiBalasubramaniyam/React-CI-CD-Pipeline">here</a>.
+
+- - -
 
 ## 🌟 Dockerization
 
@@ -138,6 +147,8 @@ jobs:
     - name: Push the image to DockerHub # Step to push the Docker image to DockerHub
       run: docker push ${{secrets.DOCKER_USERNAME}}/${{secrets.REPOSITORY_NAME}}:${{secrets.TAG_NAME}}
 ```
+
+- - -
 
 ## 🌟 AWS Deployment
 
