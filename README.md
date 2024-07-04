@@ -15,6 +15,8 @@
 
 ## 🌟 Description
 
+![ci-cd-diagram](https://github.com/DharshiBalasubramaniyam/Springboot-CI-CD-Pipeline/assets/139672976/5bb11561-eb98-4718-85fd-510c1275d5cb)
+
 This project demonstrates a complete CI/CD pipeline for a Spring Boot CRUD application using GitHub Actions, Docker, and AWS. 
 
 The pipeline automates the build, test, Dockerization, and deployment processes to ensure consistent and reliable delivery of the application.
